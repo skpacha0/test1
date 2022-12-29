@@ -1,22 +1,21 @@
 pipeline {
-    agent any 
+    agent any
     stages {
-        stage('print hello') { 
+        stage('---clean---') {
             steps {
-                sh "echo 'HELLO'"
+                sh "/opt/maven/bin/mvn clean"
             }
         }
-        stage('github repo') { 
+        stage('--test--') {
             steps {
-		sh  "echo 'test1 :::::::::)))))))' "
-	     }
+                sh "/opt/maven/bin/mvn test"
+            }
         }
-        stage('build artifact') { 
+        stage('--package--') {
             steps {
-		sh "sudo mvn install -f test1"
-		sh "sudo mvn package -f test1"
-		sh "echo 'ITS DONE' "
-                
+		
+                sh "/opt/maven/bin/mvn package"
+		sh "echo 'Hello its created please check' "
             }
         }
     }

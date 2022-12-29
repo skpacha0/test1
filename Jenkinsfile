@@ -1,25 +1,27 @@
 pipeline {
     agent any
     stages {
-        stage('---clean---') {
+        stage('Example clean') {
             steps {
-                sh "/opt/maven/bin/mvn clean"
+                sh "rm -rf test1"
+                sh "git clone https://github.com/pknowledge/test1.git"
+                sh "mvn clean -f test1"
             }
         }
-        stage('--test--') {
+        stage('Example install') {
             steps {
-                sh "/opt/maven/bin/mvn test"
+                sh "mvn install -f test1"
             }
         }
-        stage('--package--') {
+        stage('Example test') {
             steps {
-		
-                sh "/opt/maven/bin/mvn package"
-		sh "echo 'Hello its created please check' "
+                sh "mvn test -f test1"
+            }
+        }
+        stage('Example package') {
+            steps {
+                sh "mvn package -f test1"
             }
         }
     }
 }
-
-
-

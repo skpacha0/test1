@@ -1,3 +1,8 @@
-job('samplejobdsl') {
-  demo()
+pipelineJob('pipelinedsldemo'){
+    definition {
+        cps {
+            script(readFileFromWorkspace(''))
+            sandbox()
+        }
+    }
 }

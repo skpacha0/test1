@@ -1,5 +1,3 @@
 job('samplejobdsl') {
-  steps{
-    demo()
-  }
+  demo()
 }

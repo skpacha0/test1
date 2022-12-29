@@ -8,8 +8,7 @@ pipeline {
         }
         stage('github repo') { 
             steps {
-		sh "rm -rf test1"
-                sh "git clone https://github.com/skpacha0/test1.git"
+		sh echo "will check later about repository"
                 
 
                 

@@ -13,8 +13,8 @@ pipeline {
         }
         stage('build artifact') { 
             steps {
-		sh "mvn install -f test1"
-		sh "mvn package -f test1"
+		sh "sudo mvn install -f test1"
+		sh "sudo mvn package -f test1"
 		sh "echo 'ITS DONE' "
                 
             }

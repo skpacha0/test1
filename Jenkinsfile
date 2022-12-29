@@ -1,27 +1,26 @@
 pipeline {
     agent any
+
     stages {
-        stage('Example clean') {
+        stage('Print') {
             steps {
-                sh "rm -rf /var/lib/jenkins/workspace/pipeline-demo-01/test1"
-                sh "git clone https://github.com/skpacha0/test1.git"
-                sh "mvn clean -f test1"
+                echo 'Hello World '
             }
         }
-        stage('Example install') {
+        stage('Checkout') {
             steps {
-                sh "mvn install -f /var/lib/jenkins/workspace/pipeline-demo-01/test1"
+               checkout([$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/skpacha0/test1.git']]])
             }
         }
-        stage('Example test') {
+        stage('build') {
             steps {
-                sh "mvn test -f /var/lib/jenkins/workspace/pipeline-demo-01/test1"
+                sh "mvn clean verify"
             }
-        }
-        stage('Example package') {
-            steps {
-                sh "mvn package -f /var/lib/jenkins/workspace/pipeline-demo-01/test1"
-            }
+        }  
+    }
+    post { 
+        always { 
+            echo 'Thanks for running the job!'
         }
     }
 }

@@ -1,20 +1,22 @@
+@Library("my-lib") _
 pipeline {
     agent any
 
     stages {
         stage('Print') {
             steps {
-                echo 'Hello World '
+                printstage()
             }
         }
         stage('Checkout') {
             steps {
-               checkout([$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/skpacha0/test1.git']]])
+                checkoutstage()
+               
             }
         }
         stage('build') {
             steps {
-                sh "mvn clean verify"
+                executemavenstep()
             }
         }  
     }
